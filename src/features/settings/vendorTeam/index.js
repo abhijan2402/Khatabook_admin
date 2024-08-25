@@ -31,7 +31,7 @@ const TEAM_MEMBERS = [
 
 ]
 
-function Team() {
+function VendorTeam() {
 
 
     const [members, setMembers] = useState(TEAM_MEMBERS)
@@ -45,8 +45,12 @@ function Team() {
         else return <div className="badge badge-ghost">{role}</div>
     }
     const FetchAPi = async () => {
+        console.log('====================================');
+        console.log("hiiii");
+        console.log('====================================');
+
         try {
-            const response = await fetch('http://192.168.22.185:3000/api/admin/get-all-customer');
+            const response = await fetch('http://192.168.22.185:3000/api/admin/get-all-venders');
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -71,7 +75,7 @@ function Team() {
 
     return (
         <>
-            <TitleCard title="Customer list" topMargin="mt-2" TopSideButtons={<TopSideButtons />}>
+            <TitleCard title="Vendor list" topMargin="mt-2" TopSideButtons={<TopSideButtons />}>
 
                 {/* Team Member list in table format loaded constant */}
                 <div className="overflow-x-auto w-full">
@@ -83,7 +87,11 @@ function Team() {
                                 <th>created On</th>
                                 <th>Address</th>
                                 <th>Phone Number</th>
-                                <th>Wallet Id</th>
+                                <th>Shop Name</th>
+                                <th>Subscription type</th>
+                                <th>Subscription Expiry date</th>
+                                <th>Category</th>
+                                <th>Rating</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -102,7 +110,12 @@ function Team() {
                                             <td>{moment(l.createdAt).format("YYYY-MM-DD HH:MM ")}</td>
                                             <td>{l.address}</td>
                                             <td>{l.phoneNumber}</td>
-                                            <td>{l.walletId}</td>
+                                            <td>{l.shopId?.ownerName}</td>
+                                            <td>{l.shopId?.subscriptionType}</td>
+                                            <td>{moment(l.shopId?.subExpireDate).format("YYYY-MM-DD HH:MM ")}</td>
+                                            <td>{l.shopId?.category}</td>
+                                            <td>{l.shopId?.ratings}</td>
+
                                         </tr>
                                     )
                                 })
@@ -116,4 +129,4 @@ function Team() {
 }
 
 
-export default Team
+export default VendorTeam

@@ -1,6 +1,7 @@
 // All components mapping with path for internal routes
 
 import { lazy } from 'react'
+import VendorTeam from '../features/settings/vendorTeam'
 
 const Dashboard = lazy(() => import('../pages/protected/Dashboard'))
 const Welcome = lazy(() => import('../pages/protected/Welcome'))
@@ -33,6 +34,10 @@ const routes = [
   {
     path: '/settings-team',
     component: Team,
+  },
+  {
+    path: '/settings-team/customer',
+    component: VendorTeam,
   },
   {
     path: '/settings-profile',
